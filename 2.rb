@@ -15,4 +15,23 @@
 #
 #
 ## Решение:
+require 'digest'
 
+presumably_md5 = Digest::MD5.new
+user_input = gets.chomp
+incr = -1
+
+presumably_md5.update(user_input)
+string_md5 = presumably_md5.to_s
+substring = string_md5.slice(0, 5);
+
+while not substring.include?('00000') do
+  presumably_md5 = Digest::MD5.new
+  incr += 1
+  temp_string = user_input + incr.to_s
+  presumably_md5.update(temp_string)
+  string_md5 = presumably_md5.to_s
+  substring = string_md5.slice(0, 5);
+end
+
+puts incr

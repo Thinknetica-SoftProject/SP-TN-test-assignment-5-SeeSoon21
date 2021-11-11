@@ -15,7 +15,15 @@
 #
 #
 ## Решение:
+symbols = []
+
+file = File.open("data/1.txt", "r")
+file.each { |x| symbols.push(x)}
+file.close()
+
+stroka = symbols[0]
+go_up_on_floor = stroka.count("(")
+go_down_to_the_floor = stroka.count(")")
 
 
-
-
+puts go_up_on_floor - go_down_to_the_floor

@@ -15,5 +15,41 @@
 #
 #
 ## Решение:
+array_sizes = []
 
+widht = 0
+len = 0
+height = 0
 
+file = File.open("data/4.txt", "r")
+file.each {|line| array_sizes.push(line.slice(0, line.size - 1).split("x"))}
+file.close()
+
+array_ascending = []
+temp = 0
+
+#упорядочим массив, поставив размеры в порядке возрастания. по индексу: 0 – длина, 1 – высота, 2 – ширина
+for subarray in array_sizes
+  for i in (0..subarray.size() - 2)
+    for j in (1..subarray.size() - 1)
+      if subarray[j].to_i <= subarray[i].to_i
+        temp = subarray[j]
+        subarray[j] = subarray[i]
+        subarray[i] = temp
+      end
+    end
+  end
+  print "\n\n"
+end
+
+#определим площадь наименьшей стороны, длину, ширину высоту
+square = 0
+
+for array in array_sizes
+  height = array[0]
+  len = array[1]
+  width = array[2]
+  square +=2*width.to_i*len.to_i + 2*len.to_i*height.to_i + 2*height.to_i*width.to_i + height.to_i*len.to_i
+end
+
+puts square
